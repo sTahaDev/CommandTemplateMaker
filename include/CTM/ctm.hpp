@@ -1,0 +1,69 @@
+#ifndef CTM_HPP
+#define CTM_HPP
+
+#include <iostream>
+#include <vector>
+#include <map>
+#include <cstdlib>
+#include <fstream>
+
+class Ctm
+{
+private:
+    std::vector<std::string> args;
+    std::string mode;
+    std::string type;
+    struct
+    {
+        std::vector<std::string> dirs;
+        std::vector<std::string> binDir;
+        std::vector<std::string> srcDir;
+    }MakeTemplate;
+
+    enum Modes
+    {
+        newtemp,
+        help
+    };
+
+    enum Types
+    {
+        makefile,
+        cmake
+    };
+
+    enum ErrorType{
+        ModeError,
+        TypeError
+    };
+
+    enum DirType{
+        bin,
+        include,
+        lib,
+        src
+    };
+
+    std::map<Modes,std::string> ModeList;
+    std::map<Types,std::string> TypeList;
+
+    std::map<ErrorType,std::string> ErrorList;
+
+    std::map<DirType,std::string> DirList;
+
+    void createMakeTemplate();
+    void writeFile(const std::string path,const std::string data);
+    void helpMode();
+    std::string CreateDirCommand;
+    std::string CreateFileCommand;
+
+    std::string cppFileString;
+    std::string makeFileString;
+
+public:
+    Ctm(int argSize, char *args[]);
+    void run();
+    
+};
+
+#endif

@@ -52,7 +52,7 @@ private:
     std::map<DirType,std::string> DirList;
 
     void createMakeTemplate();
-    void writeFile(const std::string path,const std::string data);
+    void writeFile(const std::string &path,const std::string &data);
     void helpMode();
     std::string CreateDirCommand;
     std::string CreateFileCommand;

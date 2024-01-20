@@ -43,7 +43,7 @@ Ctm::Ctm(int argSize, char *args[])
     this->makeFileString += "./$(APP_NAME) \n";
 }
 
-void Ctm::writeFile(const std::string path, const std::string data)
+void Ctm::writeFile(const std::string &path, const std::string &data)
 {
     std::ofstream file(path);
     if (file.is_open())

@@ -53,12 +53,13 @@ private:
 
     void createMakeTemplate();
     void writeFile(const std::string &path,const std::string &data);
+    std::string readFile(const std::string &path);
     void helpMode();
     std::string CreateDirCommand;
     std::string CreateFileCommand;
 
-    std::string cppFileString;
-    std::string makeFileString;
+    std::string cppFilePath;
+    std::string makefileFilePath;
 
 public:
     Ctm(int argSize, char *args[]);

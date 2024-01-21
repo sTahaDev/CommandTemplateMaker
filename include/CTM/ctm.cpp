@@ -24,23 +24,8 @@ Ctm::Ctm(int argSize, char *args[])
     this->CreateDirCommand = "mkdir";
     this->CreateFileCommand = "touch";
 
-    // Main.cpp Dosyası
-    this->cppFileString = "#include <iostream> \n \n";
-    this->cppFileString += "int main(){ \n \n";
-    this->cppFileString += "    return 0;\n";
-    this->cppFileString += "}\n";
-
-    // Makefile Dosyası
-    this->makeFileString = "APP_NAME = App \n";
-    this->makeFileString += "MAIN_FILE = main.cpp \n";
-    this->makeFileString += "SRC_DIR = ../src";
-    this->makeFileString += "INCLUDE_DIR = ../include \n";
-    this->makeFileString += "LIB_DIR = ../lib  \n";
-    this->makeFileString += "FLAGS = -std=c++11 \n";
-    this->makeFileString += "CPP_FILES = $(INCLUDE_DIR)/CTM/ctm.cpp \n \n";
-    this->makeFileString += "all: \n";
-    this->makeFileString += "g++ $(SRC_DIR)/$(MAIN_FILE) $(CPP_FILES) $(FLAGS) -I$(INCLUDE_DIR) -L$(LIB_DIR) -o ./$(APP_NAME) \n";
-    this->makeFileString += "./$(APP_NAME) \n";
+    this->cppFilePath = "../include/Template/main.cpp";
+    this->makefileFilePath = "../include/Template/Makefile";
 }
 
 void Ctm::writeFile(const std::string &path, const std::string &data)
@@ -56,7 +41,25 @@ void Ctm::writeFile(const std::string &path, const std::string &data)
         std::cerr << "File Can't Open" << std::endl;
     }
 }
+std::string Ctm::readFile(const std::string &path){
+    std::ifstream file(path);
+    // Dosya var mı kontrol et
+    if (!file) {
+        std::cerr << "File Cant Open!" << std::endl;
+        std::exit(0);
+    }
+    // Dosyadan veriyi oku
+    std::string data = "";
+    std::string word;
+    while (std::getline(file, word)) {
+        data += word + "\n";
+    }
 
+    // Dosyayı kapat
+    file.close();
+    return data;
+
+}
 void Ctm::run()
 {
 
@@ -123,10 +126,10 @@ void Ctm::createMakeTemplate()
     }
 
     // Write Main.cpp
-    Ctm::writeFile("./src/main.cpp", this->cppFileString);
+    Ctm::writeFile("./src/main.cpp", this->readFile(cppFilePath));
 
     // Write Makefile
-    Ctm::writeFile("./bin/Makefile", this->makeFileString);
+    Ctm::writeFile("./bin/Makefile", this->readFile(makefileFilePath));
 }
 
 void Ctm::helpMode()

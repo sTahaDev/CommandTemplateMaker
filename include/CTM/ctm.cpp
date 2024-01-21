@@ -21,9 +21,6 @@ Ctm::Ctm(int argSize, char *args[])
     this->DirList[this->DirType::lib] = "lib";
     this->DirList[this->DirType::src] = "src";
 
-    this->CreateDirCommand = "mkdir";
-    this->CreateFileCommand = "touch";
-
     this->cppFilePath = "../include/Template/main.cpp";
     this->makefileFilePath = "../include/Template/Makefile";
 }

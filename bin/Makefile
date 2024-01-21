@@ -5,7 +5,7 @@ SRC_DIR = ../src
 INCLUDE_DIR = ../include
 LIB_DIR = ../lib 
 
-FLAGS = -std=c++11
+FLAGS = -std=c++17
 
 CPP_FILES = $(INCLUDE_DIR)/CTM/ctm.cpp
 

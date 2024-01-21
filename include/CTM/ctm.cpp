@@ -62,7 +62,7 @@ std::string Ctm::readFile(const std::string &path){
 }
 void Ctm::run()
 {
-
+    //Modu Alma
     if (this->args.size() > 1)
         this->mode = this->args[1];
     else
@@ -70,7 +70,7 @@ void Ctm::run()
         std::cout << this->ErrorList[this->ErrorType::ModeError] << std::endl;
         return;
     }
-
+    //Mod İşlemleri
     if (this->mode == this->ModeList[this->Modes::newtemp])
     {
         if (this->args.size() > 2)
@@ -107,22 +107,23 @@ void Ctm::createMakeTemplate()
     // cretaing all folders
     for (int i = 0; i < this->MakeTemplate.dirs.size(); i++)
     {
-        command = this->CreateDirCommand + " " + this->MakeTemplate.dirs[i];
-        system(command.c_str());
+        std::filesystem::create_directory(this->MakeTemplate.dirs[i]);
     }
 
     // create bin files
     for (int i = 0; i < this->MakeTemplate.binDir.size(); i++)
     {
-        command = this->CreateFileCommand + " ./bin/" + this->MakeTemplate.binDir[i];
-        system(command.c_str());
+        command = "./bin/" + this->MakeTemplate.binDir[i];
+        std::ofstream file(command.c_str());
+        file.close();
     }
 
     // create src files
     for (int i = 0; i < this->MakeTemplate.srcDir.size(); i++)
     {
-        command = this->CreateFileCommand + " ./src/" + this->MakeTemplate.srcDir[i];
-        system(command.c_str());
+        command = "./src/" + this->MakeTemplate.srcDir[i];
+        std::ofstream file(command.c_str());
+        file.close();
     }
 
     // Write Main.cpp
